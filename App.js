@@ -1,44 +1,33 @@
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, Button, View } from "react-native";
-import Registro from "./model/registro";
+import Registro from "./src/registro";
 
 export default function App() {
-  const [nome, setNome] = useState("");
-  const [idade, setIdade] = useState("");
-  const [contato, setContato] = useState("");
-  const [ficha, setFicha] = useState("");
+  const [nome, setNome] = useState();
+  const [idade, setIdade] = useState();
+  const [numero, setNumero] =useState();
+  const [ficha, setFicha] = useState();
 
-  function montar_ficha(params) {
+  const mostrarRegistro = (params) => {
     var aux = "";
-    let isaac = new Registro(nome, idade, contato);
-
-    aux += "Nome: " + isaac.nome + "\n";
-    aux += "Idad: " + isaac.idade + "\n";
-    aux += "Contato: " + isaac.contato + "\n";
-    aux += "Email: " + isaac.email;
-
+    let registro = new Registro(nome, idade, numero);
+    aux += registro.nome + "\n";
+    aux += registro.username + "\n";
+    aux += registro.numero + "\n";
+    aux += registro.email + "\n";
     setFicha(aux);
   }
-
   return (
     <View style={styles.container}>
       <Text>Nome</Text>
-      <TextInput
-        onChangeText={(value) => setNome(value)}
-        style={styles.campo}
-      />
-      <Text>idade</Text>
-      <TextInput
-        onChangeText={(value) => setIdade(value)}
-        style={styles.campo}
-      />
-      <Text>contato</Text>
-      <TextInput
-        onChangeText={(value) => setContato(value)}
-        style={styles.campo}
-      />
-      <Button onPress={montar_ficha} title="registrar" />
-      <Text>FICHA</Text>
+      <TextInput style={styles.campo} onChangeText={(nome) => setNome(nome)}></TextInput>
+      <Text>Idade</Text>
+      <TextInput style={styles.campo} onChangeText={(idade) => setIdade(idade)}></TextInput>
+      <Text>Número</Text>
+      <TextInput style={styles.campo} onChangeText={(numero) => setNumero(numero)}></TextInput>
+      <br></br>
+      <Button title="Registro" onPress={mostrarRegistro}></Button>
+      <br></br>
       <Text>{ficha}</Text>
     </View>
   );
